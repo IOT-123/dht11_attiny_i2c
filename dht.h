@@ -45,6 +45,7 @@
 #define DHTLIB_TIMEOUT (F_CPU/40000)
 #endif
 
+
 class dht
 {
 public:
