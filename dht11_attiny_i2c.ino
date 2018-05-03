@@ -21,6 +21,7 @@
 #define USE_SOFTWARE_SERIAL 0
 #define LIMIT_PROPERTIES 0  // if memory problems, set this to 1 and just get temp/humidity
 #define PIN_DHT 1
+#define ADDRESS_SLAVE 8
 
 #if (USE_SOFTWARE_SERIAL)
   #include <SoftwareSerial.h>
@@ -55,7 +56,7 @@ char _properties[][NUM_COLUMNS][MAX_ENTRY_SIZE] = {
 
 void setup()
 {
-  Wire.begin(8);                
+  Wire.begin(ADDRESS_SLAVE);                
   Wire.onRequest(requestEvent);
 #if (USE_SOFTWARE_SERIAL)
   mySerial.begin(9600);
