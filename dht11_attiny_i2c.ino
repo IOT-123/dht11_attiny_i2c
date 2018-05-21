@@ -21,7 +21,7 @@
 #define ADDRESS_SLAVE 10
 #define PIN_SENSOR 1
 
-#define TIME_RESPONSE_MS 0 
+#define TIME_RESPONSE_MS 0 // will be last property value pumped to master when set to 1
 #if (TIME_RESPONSE_MS)
   unsigned long startMillis; 
 #endif
@@ -47,7 +47,7 @@ const static char m10[] PROGMEM = "POWER_DOWN";
 const static char m11[] PROGMEM = "1"; 
 const static char m12[] PROGMEM = "1"; 
 const static char m13[] PROGMEM = "PREPARE_MS"; 
-const static char m14[] PROGMEM = "140000"; 
+const static char m14[] PROGMEM = "0"; 
 const static char m15[] PROGMEM = "1"; 
 const static char m16[] PROGMEM = "RESPONSE_MS"; 
 const static char m17[] PROGMEM = "50"; 
@@ -139,6 +139,9 @@ void requestEvent() {
 
 
 void getProperties(){
+  #if (TIME_RESPONSE_MS)
+    startMillis = millis();
+  #endif  
   int chk =  _dht.read11(PIN_SENSOR);
   dtostrf(_dht.humidity,2,2,_props[0].Value);
   dtostrf(_dht.temperature,2,2,_props[1].Value);
